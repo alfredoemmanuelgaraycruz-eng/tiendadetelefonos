@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CelTech - Tu Tienda de Celulares</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #dcebf8 0%, #e4f1f7 50%, #dbf3ec 100%);
+            background-attachment: fixed;
+            color: #333;
+        }
+
+        /* Franja superior del estudiante */
+        .barra-estudiante {
+            background: linear-gradient(135deg, #f0f7fc, #e8f6f2);
+            border-bottom: 3px solid #1abc9c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            padding: 10px 20px;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+
+        .barra-estudiante img {
+            height: 70px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .barra-estudiante .datos h2 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: #1f3a5f;
+        }
+
+        .barra-estudiante .datos p {
+            margin: 3px 0 0 0;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        /* Encabezado (Header) */
+        header {
+            background-color: #1f3a5f;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav a {
+            color: #fff;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Sección de Portada (Hero) con Imagen de Fondo */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('imagen_portada.jpg') no-repeat center center/cover;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        /* Contenedor Principal */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1f3a5f;
+        }
+
+        .grid-productos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        /* Tarjeta de Producto (Card) */
+        .producto-card {
+            background: linear-gradient(135deg, #f0f7fc, #e8f6f2);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+            text-align: center;
+            padding: 20px;
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .producto-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .producto-card .img-principal {
+            max-width: 100%;
+            height: 180px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+
+        /* SECCIÓN DE ACCESORIOS / CARGADORES */
+        .accesorios-contenedor {
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #f7fbff;
+            border-radius: 6px;
+            border: 1px dashed #ccc;
+        }
+
+        .accesorios-contenedor h4 {
+            margin: 0 0 10px 0;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .galeria-accesorios {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .galeria-accesorios img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        /* DISEÑO DE VIDEO INTEGRADO EN LAS TARJETAS */
+        .video-producto {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+            margin: 15px 0;
+            background-color: #000;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .precio {
+            font-size: 1.3rem;
+            color: #e74c3c;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .btn-comprar {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        a.btn-comprar {
+            display: block;
+            text-decoration: none;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .btn-comprar:hover {
+            background-color: #27ae60;
+        }
+
+        /* Secciones Adicionales */
+        .seccion-nosotros, .contacto-seccion, .seccion-bachillerato {
+            margin-top: 50px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f0f7fc, #e8f6f2);
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        /* Sección C y Bachillerato en Software */
+        .seccion-bachillerato {
+            border-left: 5px solid #2ecc71;
+        }
+
+        .seccion-bachillerato,
+        .seccion-bachillerato h2,
+        .seccion-bachillerato p {
+            color: #000000 !important;
+        }
+
+        .seccion-bachillerato p {
+            margin: 0 0 10px 0;
+            line-height: 1.6;
+        }
+
+        .seccion-bachillerato p:last-child {
+            margin-bottom: 0;
+        }
+
+        .contacto-rapido {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .tarjeta-info {
+            padding: 15px 25px;
+            background-color: #d4eaf7;
+            border-radius: 6px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .tarjeta-info-link {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Pie de página */
+        footer {
+            background-color: #1f3a5f;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 40px;
+        }
+
+        /* ===== VENTANA DE PAGO ===== */
+        .modal-fondo {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 15px;
+        }
+        .modal-fondo.activo { display: flex; }
+
+        .modal-pago {
+            background: linear-gradient(135deg, #f0f7fc, #e8f6f2);
+            border-radius: 10px;
+            padding: 25px;
+            width: 100%;
+            max-width: 420px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        .modal-pago h3 { margin-top: 0; color: #1f3a5f; }
+        .modal-cerrar {
+            position: absolute;
+            top: 10px; right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        .resumen-compra {
+            background: #d4eaf7;
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+        .metodo-pago {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+        .metodo-pago:hover { border-color: #2ecc71; }
+        .modal-pago input[type="text"],
+        .modal-pago input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .mensaje-error { color: #e74c3c; font-size: 0.9rem; min-height: 1.2em; }
+    </style>
+</head>
+<body>
+
+    <!-- Franja superior: datos del estudiante -->
+    <div class="barra-estudiante">
+        <img src="descarga.jpg" alt="Logo Instituto Nacional de Santiago de María">
+        <div class="datos">
+            <h2>Alfredo Emmanuel Garay Cruz</h2>
+            <p>Sección C · Instituto Nacional de Santiago de María</p>
+        </div>
+    </div>
+
+    <!-- Encabezado y Navegación -->
+    <header>
+        <h1>📱 CelTech Store</h1>
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#productos">Catálogo</a>
+            <a href="#bachillerato">Sección C</a>
+            <a href="#nosotros">Quiénes Somos</a>
+            <a href="#reflexion">Reflexión</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </header>
+
+    <!-- Sección de Portada (Hero) -->
+    <section id="inicio" class="hero">
+        <h2>Los mejores smartphones a un clic</h2>
+        <p>Garantía, calidad y envíos gratis a todo el país</p>
+    </section>
+
+    <!-- Sección de Productos -->
+    <main class="container">
+
+        <!-- SECCIÓN: Sección C y Bachillerato en Software -->
+        <section id="bachillerato" class="seccion-bachillerato" style="margin-top: 0; margin-bottom: 40px;">
+            <h2 class="section-title">Nuestra Sección C y el Bachillerato en Software</h2>
+            <p>Somos la Sección C del Bachillerato en Software del Instituto Nacional de Santiago de María.</p>
+            <p>En nuestra sección aprendemos trabajando en equipo, compartiendo ideas y apoyándonos en cada actividad.</p>
+            <p>El bachillerato en software nos enseña a crear programas, páginas web y aplicaciones desde cero.</p>
+            <p>Practicamos herramientas como HTML, CSS y JavaScript, las mismas que usamos para construir esta tienda.</p>
+            <p>Esta página es una muestra de lo que hemos aprendido y de nuestro deseo de ser futuros profesionales de la tecnología.</p>
+        </section>
+
+        <!-- SECCIÓN: Reflexión -->
+        <section id="reflexion" class="seccion-bachillerato" style="margin-top: 0; margin-bottom: 40px;">
+            <h2 class="section-title">Mi Reflexión</h2>
+            <p>Hacer esta página web me ayudó a entender que programar es más que escribir código: es resolver problemas paso a paso.</p>
+            <p>Al principio me costó organizar las imágenes, los videos y los estilos, pero con práctica y paciencia fui mejorando.</p>
+            <p>Aprendí a usar HTML para la estructura, CSS para el diseño y JavaScript para que la tienda tuviera una ventana de pago que funciona.</p>
+            <p>También comprendí que los errores son parte del aprendizaje, porque cada uno me enseñó algo nuevo.</p>
+            <p>Me siento motivado a seguir aprendiendo y a crear proyectos cada vez mejores en mi bachillerato en software.</p>
+            <p style="text-align: right;"><strong>— Alfredo Emmanuel Garay Cruz, Sección C</strong></p>
+        </section>
+
+        <h2 id="productos" class="section-title">Modelos Destacados</h2>
+
+        <div class="grid-productos">
+
+            <!-- Producto 1 -->
+            <div class="producto-card">
+                <img src="465281200011-2.jpg" alt="Honor x7b" class="img-principal">
+                <h3>Honor x7b</h3>
+                <p>Pantalla LCD 6.8", 256GB Almacenamiento, Cámara de 108MP.</p>
+
+                <div class="accesorios-contenedor">
+                    <h4>Cargador e Incluidos:</h4>
+                    <div class="galeria-accesorios">
+                        <img src="images (1).jpg" alt="Cargador Honor 35W">
+                    </div>
+                </div>
+
+                <video class="video-producto" controls>
+                    <source src="Vid1.mp4" type="video/mp4">
+                    Tu navegador no admite la etiqueta de video.
+                </video>
+
+                <p class="precio">$245.00</p>
+                <button class="btn-comprar">Comprar Ahora</button>
+            </div>
+
+            <!-- Producto 2 -->
+            <div class="producto-card">
+                <img src="images 2.jpg" alt="Redmi note 15 pro" class="img-principal">
+                <h3>Redmi note 15 pro 5g</h3>
+                <p>Pantalla AMOLED 6.77", 256GB Almacenamiento, Cámara de 200MP.</p>
+
+                <div class="accesorios-contenedor">
+                    <h4>Cargador e Incluidos:</h4>
+                    <div class="galeria-accesorios">
+                        <img src="images3.jpg" alt="Cargador Redmi 67W">
+                    </div>
+                </div>
+
+                <video class="video-producto" controls>
+                    <source src="Vid2.mp4" type="video/mp4">
+                    Tu navegador no admite la etiqueta de video.
+                </video>
+
+                <p class="precio">$330.00</p>
+                <button class="btn-comprar">Comprar Ahora</button>
+            </div>
+
+            <!-- Producto 3 -->
+            <div class="producto-card">
+                <img src="images.jpg" alt="Samsung galaxy s26 ultra" class="img-principal">
+                <h3>Samsung galaxy s26 ultra</h3>
+                <p>Diseño premium de titanio, carga rápida de 60W, 12GB RAM.</p>
+
+                <div class="accesorios-contenedor">
+                    <h4>Cargador e Incluidos:</h4>
+                    <div class="galeria-accesorios">
+                        <img src="imagen4.jpg" alt="Cargador Samsung 45W">
+                    </div>
+                </div>
+
+                <video class="video-producto" controls>
+                    <source src="Vid3.mp4" type="video/mp4">
+                    Tu navegador no admite la etiqueta de video.
+                </video>
+
+                <p class="precio">$1399.00</p>
+                <button class="btn-comprar">Comprar Ahora</button>
+            </div>
+
+        </div>
+
+        <!-- SECCIÓN: Quiénes Somos -->
+        <section id="nosotros" class="seccion-nosotros">
+            <h2 class="section-title">Quiénes Somos</h2>
+            <p>
+                En <strong>CelTech Store</strong> somos apasionados por acercarte la última tecnología móvil con los precios más competitivos del mercado. Nos dedicamos a distribuir smartphones originales de las marcas líderes en el mundo, garantizando una excelente experiencia de compra y brindando un soporte técnico personalizado y confiable a cada uno de nuestros clientes.
+            </p>
+        </section>
+
+        <!-- SECCIÓN: Contacto -->
+        <section id="contacto" class="contacto-seccion">
+            <div class="contacto-contenedor">
+                <h2 class="section-title">Ponte en Contacto</h2>
+                <p style="text-align: center;">¿Tienes dudas sobre un modelo o quieres realizar un pedido? Escríbenos directamente.</p>
+
+                <div class="contacto-rapido">
+                    <a href="https://wa.me/50377747027" target="_blank" class="tarjeta-info-link">
+                        <div class="tarjeta-info">
+                            <span>🟢 WhatsApp:</span>
+                            <strong>7774-7027</strong>
+                        </div>
+                    </a>
+                    <div class="tarjeta-info">
+                        <span>📧 Correo:</span>
+                        <strong>20059735@clases.edu.sv</strong>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Pie de Página -->
+    <footer>
+        <p>© 2026 CelTech Store. Creado para la actividad de clase - Módulo 1.8</p>
+    </footer>
+
+    <!-- Ventana de métodos de pago -->
+    <div class="modal-fondo" id="modalPago">
+        <div class="modal-pago">
+            <button class="modal-cerrar" id="cerrarModal">&times;</button>
+
+            <div id="pasoPago">
+                <h3>Elige tu método de pago</h3>
+                <div class="resumen-compra">
+                    <strong id="resumenProducto"></strong><br>
+                    <span id="resumenPrecio"></span>
+                </div>
+
+                <label class="metodo-pago">
+                    <input type="radio" name="metodo" value="Tarjeta de crédito/débito"> 💳 Tarjeta de crédito / débito
+                </label>
+                <label class="metodo-pago">
+                    <input type="radio" name="metodo" value="Transferencia bancaria"> 🏦 Transferencia bancaria
+                </label>
+                <label class="metodo-pago">
+                    <input type="radio" name="metodo" value="Pago contra entrega"> 📦 Pago contra entrega
+                </label>
+                <label class="metodo-pago">
+                    <input type="radio" name="metodo" value="Efectivo en tienda"> 💵 Efectivo en tienda
+                </label>
+
+                <input type="text" id="nombreCliente" placeholder="Tu nombre">
+                <input type="tel" id="telefonoCliente" placeholder="Teléfono / WhatsApp">
+                <p class="mensaje-error" id="errorPago"></p>
+
+                <button class="btn-comprar" id="confirmarPago">Confirmar pedido</button>
+            </div>
+
+            <div id="pasoExito" style="display:none; text-align:center;">
+                <h3>✅ ¡Pedido recibido!</h3>
+                <p id="textoExito"></p>
+                <p>Te estamos llevando a WhatsApp para que comentes sobre tu teléfono...</p>
+                <a class="btn-comprar" id="enlaceWhatsapp" href="#" target="_blank">Ir a WhatsApp ahora</a>
+                <button class="btn-comprar" id="cerrarExito" style="background-color:#7f8c8d;">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('modalPago');
+        const pasoPago = document.getElementById('pasoPago');
+        const pasoExito = document.getElementById('pasoExito');
+        let productoActual = '';
+        let precioActual = '';
+
+        // Abrir la ventana al presionar "Comprar Ahora"
+        document.querySelectorAll('.producto-card .btn-comprar').forEach(function (boton) {
+            boton.addEventListener('click', function () {
+                const tarjeta = boton.closest('.producto-card');
+                productoActual = tarjeta.querySelector('h3').textContent;
+                precioActual = tarjeta.querySelector('.precio').textContent;
+
+                document.getElementById('resumenProducto').textContent = productoActual;
+                document.getElementById('resumenPrecio').textContent = precioActual;
+                document.getElementById('errorPago').textContent = '';
+
+                pasoPago.style.display = 'block';
+                pasoExito.style.display = 'none';
+                modal.classList.add('activo');
+            });
+        });
+
+        // Confirmar pedido (sin pedir DUI)
+        document.getElementById('confirmarPago').addEventListener('click', function () {
+            const metodo = document.querySelector('input[name="metodo"]:checked');
+            const nombre = document.getElementById('nombreCliente').value.trim();
+            const telefono = document.getElementById('telefonoCliente').value.trim();
+            const error = document.getElementById('errorPago');
+
+            if (!metodo) { error.textContent = 'Selecciona un método de pago.'; return; }
+            if (!nombre || !telefono) { error.textContent = 'Escribe tu nombre y teléfono.'; return; }
+
+            document.getElementById('textoExito').textContent =
+                '¡Tu pedido fue un éxito! Gracias ' + nombre + ' por comprar ' + productoActual +
+                ' (' + precioActual + ').';
+
+            pasoPago.style.display = 'none';
+            pasoExito.style.display = 'block';
+
+            // Mensaje para WhatsApp
+            const mensaje = 'Hola, soy ' + nombre + '. Acabo de hacer el pedido de ' + productoActual +
+                ' (' + precioActual + ') con pago por: ' + metodo.value +
+                '. Mi teléfono es ' + telefono + '. Quisiera comentar sobre el teléfono.';
+            const urlWhatsapp = 'https://wa.me/50377747027?text=' + encodeURIComponent(mensaje);
+
+            document.getElementById('enlaceWhatsapp').href = urlWhatsapp;
+
+            // Redirigir automáticamente a WhatsApp después de 2.5 segundos
+            setTimeout(function () { window.location.href = urlWhatsapp; }, 2500);
+        });
+
+        // Cerrar la ventana
+        function cerrarModal() { modal.classList.remove('activo'); }
+        document.getElementById('cerrarExito').addEventListener('click', cerrarModal);
+        document.getElementById('cerrarModal').addEventListener('click', cerrarModal);
+        modal.addEventListener('click', function (e) { if (e.target === modal) cerrarModal(); });
+    </script>
+
+</body>
+</html>
